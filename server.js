@@ -14,7 +14,7 @@ const Service = require('./models/service');
 const PORT = process.env.PORT || 8080;
 
 app.get("/", (req,res) => {
-    console.log("Hello from Ward-Connect-Backend")
+    res.send("Hello from Ward-Connect Backend");
 });
 
 app.get('/api/wards', async (req,res) => {
