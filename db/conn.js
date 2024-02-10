@@ -1,6 +1,8 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://santhoshprabhu:9QywU2KJMiwgNUma@wardconnect.jyetjxb.mongodb.net/wardconnect?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGOBD_URI)
 .then(() => {
     console.log("MongoDB Connected Successfully!!");
 }).catch((e) => {

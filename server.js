@@ -11,7 +11,7 @@ const Ward = require("./models/ward");
 const Landmark = require("./models/landmark");
 const Service = require('./models/service');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.get("/", (req,res) => {
     res.send("Hello from Ward-Connect Backend");
