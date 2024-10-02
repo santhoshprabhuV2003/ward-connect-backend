@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  # MongoDB Service
+  mongo:
+    image: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # Node.js Express App Service
+  app:
+    build: .
+    container_name: express-app
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://root:root123@mongo:27017/ward-connect?authSource=admin
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+
+  # Mongo Express Service (UI for MongoDB)
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root123
+      ME_CONFIG_MONGODB_SERVER: mongo
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
